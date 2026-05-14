@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경쟁력 | ROBOT-SOFT Corp.</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .report-hero {
+            background: #000;
+            padding-top: 80px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .report-breadcrumb {
+            padding: 2rem 0;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .report-title-section {
+            padding-bottom: 4rem;
+        }
+
+        .report-title-section h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .report-visual-card {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url('C:/Users/4-410-36/.gemini/antigravity/brain/31801746-6840-449f-8d90-8bd1586f36d2/corporate_campus_panorama_centered_1778726049949.png');
+            background-size: cover;
+            background-position: center center;
+            min-height: 420px;
+            width: 1200px;
+            max-width: 95%;
+            margin: 0 auto;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 2rem 0;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .visual-content {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .visual-left {
+            flex: 0 0 420px;
+        }
+
+        .visual-left h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .visual-left p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .total-capacity {
+            margin-bottom: 1.2rem;
+        }
+
+        .capacity-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: #fff;
+        }
+
+        .capacity-value {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #a288ff;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .capacity-unit {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-left: 0.5rem;
+            color: #fff;
+        }
+
+        .visual-right {
+            flex: 0 0 55%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 3rem;
+            padding-top: 1rem;
+        }
+
+        .stat-box {
+            text-align: right;
+        }
+
+        .stat-box-label {
+            display: block;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .stat-box-value {
+            font-size: 2rem;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .sub-capacity-grid {
+            margin-top: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .sub-capacity-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .sub-label { color: #888; }
+        .sub-value { 
+            font-weight: 700; 
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Advanced Stacked Bar Chart Section */
+        .chart-section {
+            padding: 8rem 0;
+            background: #fff;
+        }
+
+        .chart-header {
+            margin-bottom: 5rem;
+        }
+
+        .chart-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #003366;
+            margin-bottom: 1.2rem;
+        }
+
+        .chart-desc {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .chart-outer-container {
+            display: flex;
+            margin-top: 2rem;
+            position: relative;
+            padding-left: 60px; /* Space for Y-axis */
+            min-height: 500px;
+        }
+
+        .y-axis {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 400px;
+            width: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-right: 10px;
+            color: #888;
+            font-size: 0.85rem;
+            border-right: 1px solid #ddd;
+        }
+
+        .y-axis-label {
+            position: absolute;
+            left: -100px;
+            top: 50%;
+            transform: rotate(-90deg);
+            white-space: nowrap;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .bar-chart-container {
+            flex: 1;
+            height: 400px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding-bottom: 0;
+            border-bottom: 1px solid #333;
+            position: relative;
+            padding-top: 40px;
+        }
+
+        .bar-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end;
+            cursor: pointer;
+        }
+
+        .bar-wrapper:hover .bar {
+            filter: brightness(1.1);
+            transform: scaleX(1.1);
+        }
+
+        .bar {
+            width: 32px;
+            display: flex;
+            flex-direction: column-reverse;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .segment {
+            width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Stack Colors */
+        .seg-1 { background: #9b6bff; } /* Others */
+        .seg-2 { background: #5a4bfa; } /* International */
+        .seg-3 { background: #1a0dab; } /* Domestic */
+
+        .total-label {
+            position: absolute;
+            top: -25px;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #111;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .bar-year {
+            margin-top: 15px;
+            font-weight: 500;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .x-axis-title {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .table-btn {
+            display: block;
+            margin: 5rem auto 0;
+            padding: 0.9rem 2.2rem;
+            background: #001a33;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: background 0.3s;
+        }
+
+        .table-btn:hover {
+            background: #003366;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-area" onclick="location.href='index.html'">
+                <svg width="36" height="36" viewBox="0 0 100 100" class="logo-icon" style="margin-right: 12px;">
+                    <defs>
+                        <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#0088ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#003366;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="5" y="5" width="90" height="90" rx="18" fill="url(#logo-grad)" />
+                    <path d="M35 30V70M35 30H55C60.5 30 65 34.5 65 40V45C65 50.5 60.5 55 55 55H35M55 55L70 70" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                </svg>
+                <span class="dept-name" style="font-weight: 800; color: #003366; letter-spacing: -0.5px;">ROBOT-SOFT Corp.</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#about" data-i18n="nav-about">기업소개</a></li>
+                    <li><a href="index.html#services" data-i18n="nav-services">핵심솔루션</a></li>
+                    <li><a href="index.html#faculty" data-i18n="nav-faculty">기술진</a></li>
+                    <li><a href="index.html#resources" data-i18n="nav-resources">기술지원</a></li>
+                    <li><a href="index.html#news" data-i18n="nav-news">기업소식</a></li>
+                    <li><a href="board.html" data-i18n="nav-board">포럼</a></li>
+                </ul>
+            </nav>
+            <div class="lang-selector">
+                <span id="lang-ko" class="lang-btn active" style="cursor: pointer;">KOR</span>
+                |
+                <span id="lang-en" class="lang-btn" style="cursor: pointer;">ENG</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="report-hero">
+        <div class="container">
+            <div class="report-breadcrumb" data-i18n="report-breadcrumb">
+                Home / About Us / 기업성장실적 / 경쟁력
+            </div>
+            <div class="report-title-section">
+                <h1 data-i18n="report-title">경쟁력</h1>
+            </div>
+        </div>
+
+        <div class="report-visual-card">
+            <div class="container">
+                <div class="visual-content">
+                    <div class="visual-left">
+                        <h2 data-i18n="report-visual-title">한 눈에 보기</h2>
+                        <p data-i18n="report-visual-desc">글로벌 No.1 로봇 소프트웨어 플랫폼 기업 ROBOT-SOFT</p>
+                        
+                        <div class="total-capacity">
+                            <span class="capacity-label" data-i18n="total-cap-label">총 시스템 통합 누적량</span>
+                            <div class="capacity-value" style="color: #a288ff;"><span class="count-up" data-target="5200">0</span> <span class="capacity-unit">Units +</span></div>
+                        </div>
+
+                        <div class="sub-capacity-grid">
+                            <div class="sub-capacity-item">
+                                <span class="sub-label">Mobile Robots</span>
+                                <span class="sub-value"><span class="count-up" data-target="1520">0</span> U</span>
+                            </div>
+                            <div class="sub-capacity-item">
+                                <span class="sub-label">Co-Robots</span>
+                                <span class="sub-value"><span class="count-up" data-target="2100">0</span> U</span>
+                            </div>
+                            <div class="sub-capacity-item">
+                                <span class="sub-label">Industrial Arms</span>
+                                <span class="sub-value"><span class="count-up" data-target="1280">0</span> U</span>
+                            </div>
+                            <div class="sub-capacity-item">
+                                <span class="sub-label">Special Purpose</span>
+                                <span class="sub-value"><span class="count-up" data-target="300">0</span> U</span>
+                            </div>
+                        </div>
+
+                        <div class="facility-link" style="margin-top: 3rem;">
+                            <a href="#" style="color: #fff; text-decoration: none; border: 1px solid rgba(255,255,255,0.4); padding: 0.8rem 1.5rem; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;" data-i18n="control-center-link">
+                                스마트 팩토리 통합 관제 센터 확인하기 
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="visual-right">
+                        <div class="stat-box">
+                            <span class="stat-box-label" data-i18n="stat-global-clients">글로벌 고객사</span>
+                            <div class="stat-box-value"><span class="count-up" data-target="210">0</span>+</div>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-box-label" data-i18n="stat-engineers">전문 엔지니어</span>
+                            <div class="stat-box-value"><span class="count-up" data-target="850">0</span>+</div>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-box-label" data-i18n="stat-patents">기술 특허 보유</span>
+                            <div class="stat-box-value"><span class="count-up" data-target="440">0</span>+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="chart-section">
+        <div class="container">
+            <div class="chart-header">
+                <h2 class="chart-title" data-i18n="chart-title">글로벌 기술 인증 및 보급 현황</h2>
+                <p class="chart-desc" data-i18n="chart-desc">ROBOT-SOFT는 독보적인 기술력을 바탕으로 전 세계 시장에서 글로벌 규제 승인 및 플랫폼 보급을 가속화하고 있습니다.</p>
+            </div>
+
+            <div class="chart-legend">
+                <div class="legend-item"><div class="legend-color" style="background:#9b6bff"></div> Others (Global)</div>
+                <div class="legend-item"><div class="legend-color" style="background:#5a4bfa"></div> US / EU</div>
+                <div class="legend-item"><div class="legend-color" style="background:#1a0dab"></div> Domestic (KR)</div>
+            </div>
+
+            <div class="chart-outer-container">
+                <div class="y-axis">
+                    <span class="y-axis-label">Cumulative Global Technical Approvals</span>
+                    <span>450</span><span>400</span><span>350</span><span>300</span><span>250</span><span>200</span><span>150</span><span>100</span><span>50</span><span>0</span>
+                </div>
+                <div class="bar-chart-container">
+                    <div class="bar-wrapper">
+                        <div class="total-label">1</div>
+                        <div class="bar" style="height: 2px;"><div class="segment seg-3" style="height: 100%;"></div></div>
+                        <div class="bar-year">2015</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">7</div>
+                        <div class="bar" style="height: 16px;">
+                            <div class="segment seg-3" style="height: 70%;"></div>
+                            <div class="segment seg-2" style="height: 30%;"></div>
+                        </div>
+                        <div class="bar-year">2016</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">12</div>
+                        <div class="bar" style="height: 26px;">
+                            <div class="segment seg-3" style="height: 60%;"></div>
+                            <div class="segment seg-2" style="height: 30%;"></div>
+                            <div class="segment seg-1" style="height: 10%;"></div>
+                        </div>
+                        <div class="bar-year">2017</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">22</div>
+                        <div class="bar" style="height: 48px;">
+                            <div class="segment seg-3" style="height: 50%;"></div>
+                            <div class="segment seg-2" style="height: 35%;"></div>
+                            <div class="segment seg-1" style="height: 15%;"></div>
+                        </div>
+                        <div class="bar-year">2018</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">58</div>
+                        <div class="bar" style="height: 120px;">
+                            <div class="segment seg-3" style="height: 45%;"></div>
+                            <div class="segment seg-2" style="height: 40%;"></div>
+                            <div class="segment seg-1" style="height: 15%;"></div>
+                        </div>
+                        <div class="bar-year">2019</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">92</div>
+                        <div class="bar" style="height: 180px;">
+                            <div class="segment seg-3" style="height: 40%;"></div>
+                            <div class="segment seg-2" style="height: 45%;"></div>
+                            <div class="segment seg-1" style="height: 15%;"></div>
+                        </div>
+                        <div class="bar-year">2020</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">139</div>
+                        <div class="bar" style="height: 250px;">
+                            <div class="segment seg-3" style="height: 35%;"></div>
+                            <div class="segment seg-2" style="height: 45%;">20</div>
+                            <div class="segment seg-1" style="height: 20%;"></div>
+                        </div>
+                        <div class="bar-year">2021</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">212</div>
+                        <div class="bar" style="height: 320px;">
+                            <div class="segment seg-3" style="height: 25%;"></div>
+                            <div class="segment seg-2" style="height: 55%;">42</div>
+                            <div class="segment seg-1" style="height: 20%;"></div>
+                        </div>
+                        <div class="bar-year">2022</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">279</div>
+                        <div class="bar" style="height: 350px;">
+                            <div class="segment seg-3" style="height: 20%;"></div>
+                            <div class="segment seg-2" style="height: 60%;">65</div>
+                            <div class="segment seg-1" style="height: 20%;"></div>
+                        </div>
+                        <div class="bar-year">2023</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">348</div>
+                        <div class="bar" style="height: 375px;">
+                            <div class="segment seg-3" style="height: 15%;"></div>
+                            <div class="segment seg-2" style="height: 65%;">88</div>
+                            <div class="segment seg-1" style="height: 20%;"></div>
+                        </div>
+                        <div class="bar-year">2024</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">428</div>
+                        <div class="bar" style="height: 390px;">
+                            <div class="segment seg-3" style="height: 10%;"></div>
+                            <div class="segment seg-2" style="height: 70%;">115</div>
+                            <div class="segment seg-1" style="height: 20%;"></div>
+                        </div>
+                        <div class="bar-year">2025</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="total-label">444</div>
+                        <div class="bar" style="height: 400px;">
+                            <div class="segment seg-3" style="height: 10%;"></div>
+                            <div class="segment seg-2" style="height: 70%;">142</div>
+                            <div class="segment seg-1" style="height: 20%;"></div>
+                        </div>
+                        <div class="bar-year">2026</div>
+                    </div>
+                </div>
+            </div>
+            <div class="x-axis-title">Year of Approval</div>
+
+            <button class="table-btn" data-i18n="chart-btn-switch">차트 표로 전환하여 보기</button>
+        </div>
+    </section>
+
+    <footer style="background:#f8f9fa; padding: 4rem 0; text-align:center; border-top: 1px solid #eee;">
+        <p>&copy; 2026 ROBOT-SOFT Corp. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth transition for bars
+        function animateBars() {
+            const bars = document.querySelectorAll('.bar');
+            bars.forEach(bar => {
+                const h = bar.style.height;
+                bar.style.height = '0';
+                setTimeout(() => {
+                    bar.style.height = h;
+                }, 200);
+            });
+        }
+
+        // Count-up animation
+        function animateNumbers() {
+            const counters = document.querySelectorAll('.count-up');
+            const duration = 2000; // 2 seconds
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const startTime = performance.now();
+                
+                const updateCount = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Easing function (easeOutExpo)
+                    const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                    
+                    const currentCount = Math.floor(easeProgress * target);
+                    counter.innerText = currentCount.toLocaleString();
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.innerText = target.toLocaleString();
+                    }
+                };
+                
+                requestAnimationFrame(updateCount);
+            });
+        }
+
+        // Intersection Observer to trigger animations
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('report-visual-card')) {
+                        animateNumbers();
+                    } else if (entry.target.classList.contains('chart-section')) {
+                        animateBars();
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const visualCard = document.querySelector('.report-visual-card');
+            const chartSection = document.querySelector('.chart-section');
+            
+            if (visualCard) observer.observe(visualCard);
+            if (chartSection) observer.observe(chartSection);
+        });
+    </script>
+    <script src="translations.js"></script>
+</body>
+</html>
